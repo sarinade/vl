@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameLoop : Singleton<GameLoop>
 {
+    private const int spawnAttemptsPerFrame = 3;
+
     #region Inspector
 
     [SerializeField]
@@ -38,22 +40,42 @@ public class GameLoop : Singleton<GameLoop>
 
                 nextSpawnTimestamp = Time.time + spawnParams.SpawnInterval;
 
-                Vector3 nextPosition = GetRandomSpawnPosition();
                 bool spawnTitan = spawnParams.GetSpawnTitanNext(kills);
-                
+                Enemy enemy;
+
                 if(spawnTitan)
                 {
-                    Enemy titan = spawnParams.TitanPrefab;
-                    PoolService.Instance.Spawn(titan, nextPosition, Quaternion.identity);
-
-                    yield break;
+                    enemy = spawnParams.TitanPrefab;
                 }
                 else
                 {
-                    Enemy prefab = spawnParams.GetWeighedRandomEnemy();
-                    PoolService.Instance.Spawn(prefab, nextPosition, Quaternion.identity);
+                    enemy = spawnParams.GetWeighedRandomEnemy();
                     spawnedEnemies++;
                 }
+
+                Vector3 nextPosition = GetRandomSpawnPosition();
+                bool positionValidated = false;
+
+                while (!positionValidated)
+                {
+                    for (int i = 0; i < spawnAttemptsPerFrame; i++)
+                    {
+                        if (!MathHelpers.CustomBoxCheck(nextPosition, Vector3.zero, 0.0f, Quaternion.identity, enemy.transform.localScale))
+                        {
+                            positionValidated = true;
+                            break;
+                        }
+
+                        nextPosition = GetRandomSpawnPosition();
+                    }
+
+                    yield return null;
+                }
+
+                PoolService.Instance.Spawn(enemy, nextPosition, Quaternion.identity);
+
+                if (spawnTitan)
+                    yield break;
             }
 
             yield return null;

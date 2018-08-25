@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63b9480463b9c34090fccea92375ba3, type: 3}
   m_Name: EnemySpawnParams
   m_EditorClassIdentifier: 
-  SpawnInterval: Infinity
+  SpawnInterval: 0.5
   SpawnRadius: 70
   SpawnCap: 10
   KillsToSpawnTitan: 25
@@ -19,8 +19,8 @@ MonoBehaviour:
     type: 2}
   SpawnableEnemies:
   - Prefab: {fileID: 114540717686519352, guid: c0545c8940bc68e4b92bafbadd1f262e, type: 2}
-    weight: 60
+    weight: 70
   - Prefab: {fileID: 114450431876905150, guid: c7f3f3dddc94eee44b73ae3eff2302d1, type: 2}
-    weight: 20
+    weight: 15
   - Prefab: {fileID: 114139254423682442, guid: af2552e9c7dc1894a86722ee411ec537, type: 2}
-    weight: 20
+    weight: 15

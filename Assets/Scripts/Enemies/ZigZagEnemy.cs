@@ -11,9 +11,7 @@ public enum EZigZagEnemyDir
 
 public class ZigZagEnemy : Enemy
 {
-    private EZigZagEnemyDir nextDir = EZigZagEnemyDir.Forward;
-
-    private int nextDirectionIndex = 0;
+    private int directionIndex = 0;
     private int steps = 0;
 
     #region Inspector
@@ -25,40 +23,50 @@ public class ZigZagEnemy : Enemy
 
     public override void Reinitialize()
     {
-        base.Reinitialize();
         steps = 0;
-        nextDirectionIndex = 0;
+        directionIndex = 0;
+
+        base.Reinitialize();
     }
 
     protected override IEnumerator GetSpecialBehavior()
     {
-        if (steps < specialParams.StepsPerDir)
+        int maxSteps = (int) Mathf.Clamp(specialParams.StepsPerDir - 1, 1, Mathf.Infinity);
+
+        if (steps < maxSteps)
         {
             steps++;
             yield break;
         }
 
-        nextDirectionIndex = (nextDirectionIndex + 1) % specialParams.DirectionQueue.Length;
+        directionIndex = (directionIndex + 1) % specialParams.DirectionQueue.Length;
         steps = 0;
     }
 
     protected override Vector3 GetNextStepFacing()
     {
-        EZigZagEnemyDir nextDir = specialParams.DirectionQueue[nextDirectionIndex];
+        EZigZagEnemyDir direction = specialParams.DirectionQueue[directionIndex];
+        return EnumToFacing(direction);
+    }
 
+    private Vector3 EnumToFacing(EZigZagEnemyDir dir)
+    {
         Vector3 forward = base.GetNextStepFacing();
+        Vector3 result;
 
-        if (nextDir == EZigZagEnemyDir.Forward)
+        if (dir == EZigZagEnemyDir.Forward)
         {
-            return forward;
+            result = forward;
         }
-        else if(nextDir == EZigZagEnemyDir.Left)
+        else if (dir == EZigZagEnemyDir.Left)
         {
-            return Vector3.Cross(forward, Vector3.up);
+            result = Vector3.Cross(forward, Vector3.up);
         }
         else
         {
-            return Vector3.Cross(forward, Vector3.down);
+            result = Vector3.Cross(forward, Vector3.down);
         }
+
+        return result;
     }
 }

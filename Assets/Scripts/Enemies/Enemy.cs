@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoPoolable
 {
-    private string colorPropertyName = "_Color";
-    private int enemyMaskLayerMask;
+    private const string colorPropertyName = "_Color";
     private const float playerCollisionThreshold = 10.0f;
+    private const float sweepTestOffset = 2.1f;
 
     private YieldInstruction collisionAvoidanceDelay = new WaitForSeconds(1.0f);
     private YieldInstruction stepInterval;
@@ -48,8 +48,6 @@ public class Enemy : MonoPoolable
 
     void Awake()
     {
-        enemyMaskLayerMask = LayerMask.GetMask("Enemy");
-
         collider = GetComponent<BoxCollider>();
 
         renderer = GetComponentInChildren<Renderer>();
@@ -86,6 +84,8 @@ public class Enemy : MonoPoolable
         body.localRotation = initialBodyRotation;
 
         renderer.material.SetColor(colorPropertyName, color);
+
+        transform.forward = (Player.Instance.transform.position - transform.position).normalized;
     }
 
     void OnEnable()
@@ -95,26 +95,25 @@ public class Enemy : MonoPoolable
 
     private IEnumerator UpdateRoutine()
     {
+        yield return null;
+
         while(true)
         {
-            if(Physics.CheckBox(transform.position + transform.forward * collider.bounds.size.z * 1.1f, collider.size * 0.5f, transform.rotation, enemyMaskLayerMask))
+            transform.forward = GetNextStepFacing();
+
+            if(MathHelpers.CustomBoxCheck(transform.position, transform.forward, sweepTestOffset, transform.rotation, transform.localScale * 0.5f))
             {
                 yield return collisionAvoidanceDelay;
                 continue;
             }
 
-            Vector3 test = GetNextStepFacing();
-            transform.forward = test;
-
-            yield return GetSpecialBehavior();
+            yield return StartCoroutine(GetSpecialBehavior());
 
             float elapsed = 0.0f;
             float time = enemyParams.StepTime;
 
             Quaternion desiredRotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
             Quaternion fromRotation = bodyPivot.localRotation;
-
-            Vector3 pivotOffset = (body.position - bodyPivot.position) * 2.0f;
 
             while(elapsed < time)
             {
@@ -139,7 +138,7 @@ public class Enemy : MonoPoolable
             bodyPivot.localRotation = Quaternion.identity;
             body.rotation = bodyRotation;
 
-            bodyPivot.position -= new Vector3(pivotOffset.x, 0.0f, pivotOffset.z);
+            bodyPivot.localPosition = initialPivotPosition;
             body.position = bodyPosition;
 
             if(TryHitPlayer())
