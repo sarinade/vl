@@ -236,5 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13347f4b01382e47a602440a8681015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerParams: {fileID: 11400000, guid: cb1edecdaaab9244bb3b3d6d63fa5656, type: 2}
   loadout: {fileID: 11400000, guid: 74bdf288f09f94f488db6d558ca73d31, type: 2}
   inputParams: {fileID: 11400000, guid: 42d785621f0875e4e961230be45e40b3, type: 2}

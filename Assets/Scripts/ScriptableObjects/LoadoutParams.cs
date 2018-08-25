@@ -13,7 +13,7 @@ public class LoadoutParams : ScriptableObject
     {
         if (index < 0 || index >= Weapons.Length)
         {
-            Debug.LogErrorFormat("Weapon with index {0} is not present in loadout.", index);
+            Debug.LogFormat("Weapon with index {0} is not present in loadout.", index);
             return null;
         }
 

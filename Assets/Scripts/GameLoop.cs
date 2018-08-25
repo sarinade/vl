@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLoop : Singleton<GameLoop>
 {
@@ -8,6 +9,14 @@ public class GameLoop : Singleton<GameLoop>
 
     [SerializeField]
     private EnemySpawnParams spawnParams = null;
+
+    [Space]
+
+    [SerializeField]
+    private int gameSceneIndex = 1;
+
+    [SerializeField]
+    private int menuSceneIndex = 0;
 
     #endregion
 
@@ -53,5 +62,15 @@ public class GameLoop : Singleton<GameLoop>
         Vector3 result = transform.position + new Vector3(pointPonCircle.x, 0.0f, pointPonCircle.y) * spawnParams.SpawnRadius;
 
         return result;
+    }
+
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene(menuSceneIndex);
+    }
+
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(gameSceneIndex);
     }
 }

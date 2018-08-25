@@ -142,7 +142,10 @@ public class Enemy : MonoPoolable
             bodyPivot.position -= new Vector3(pivotOffset.x, 0.0f, pivotOffset.z);
             body.position = bodyPosition;
 
-            TryHitPlayer();
+            if(TryHitPlayer())
+            {
+                yield break;
+            }
 
             yield return stepInterval;
         }
@@ -159,16 +162,20 @@ public class Enemy : MonoPoolable
         return new Vector3(dir.x, 0.0f, dir.z);
     }
 
-    protected void TryHitPlayer()
+    protected bool TryHitPlayer()
     {
         float sqrMagToPlayer = (Player.Instance.transform.position - transform.position).sqrMagnitude;
 
         if (sqrMagToPlayer <= playerCollisionThreshold)
         {
             StartCoroutine(FlashRoutine());
-            Player.Instance.Hit();
+            Player.Instance.Hit(enemyParams.Damage);
             Dispose();
+
+            return true;
         }
+
+        return false;
     }
 
     public void Hit(int damage, out bool dead)
@@ -206,7 +213,7 @@ public class Enemy : MonoPoolable
     {
         renderer.material = hitMaterial;
 
-        yield return new WaitForSeconds(0.033f);
+        yield return new WaitForSeconds(0.066f);
 
         renderer.material = baseMaterial;
 

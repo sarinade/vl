@@ -12,9 +12,10 @@ public class Player : Singleton<Player>
     #region Inspector
 
     [SerializeField]
-    private LoadoutParams loadout = null;
+    private PlayerParams playerParams = null;
 
-    [Space]
+    [SerializeField]
+    private LoadoutParams loadout = null;
 
     [SerializeField]
     private InputParams inputParams = null;
@@ -24,6 +25,8 @@ public class Player : Singleton<Player>
     private Weapon weapon = null;
     private int weaponIndex = 0;
 
+    int hp;
+
     void Start()
     {
         aimMask = LayerMask.GetMask("Enemy");
@@ -31,6 +34,7 @@ public class Player : Singleton<Player>
         weapon = GetComponent<Weapon>();
         SetWeapon(loadout.StartingWeaponIndex);
 
+        hp = playerParams.HP;
         GameCamera.Instance.Target = transform;
     }
 
@@ -95,15 +99,23 @@ public class Player : Singleton<Player>
 
     private void SetWeapon(int index)
     {
-        weaponIndex = index;
-        WeaponParams newWeapon = loadout.GetWeapon(weaponIndex);
+        WeaponParams newWeapon = loadout.GetWeapon(index);
 
+        if (newWeapon == null)
+            return;
+
+        weaponIndex = index;
         weapon.SetWeaponParams(newWeapon);
         HUD.Instance.SetWeaponNameLabel(newWeapon.Name);
     }
 
-    public void Hit()
+    public void Hit(int damage)
     {
+        hp -= damage;
 
+        if(hp <= 0)
+        {
+            HUD.Instance.ShowGameEndPanel(false);
+        }
     }
 }

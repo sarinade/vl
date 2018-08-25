@@ -6,6 +6,7 @@ using UnityEngine;
 public class SharedEnemyParams : ScriptableObject
 {
     public int HP = 5;
+    public int Damage = 1;
     public float StepTime = 1.0f;
     public float StepInterval = 0.33f;
 }
