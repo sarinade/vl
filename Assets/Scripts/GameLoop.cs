@@ -10,13 +10,8 @@ public class GameLoop : Singleton<GameLoop>
     [SerializeField]
     private EnemySpawnParams spawnParams = null;
 
-    [Space]
-
     [SerializeField]
-    private int gameSceneIndex = 1;
-
-    [SerializeField]
-    private int menuSceneIndex = 0;
+    private SceneParams sceneParams = null;
 
     #endregion
 
@@ -81,11 +76,11 @@ public class GameLoop : Singleton<GameLoop>
 
     public void LoadMenuScene()
     {
-        SceneManager.LoadScene(menuSceneIndex);
+        SceneManager.LoadScene(sceneParams.MenuSceneIndex);
     }
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene(gameSceneIndex);
+        SceneManager.LoadScene(sceneParams.GameSceneIndex);
     }
 }
