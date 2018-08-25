@@ -84,6 +84,11 @@ public class Enemy : MonoPoolable
                 continue;
             }
 
+            Vector3 test = GetNextStepFacing();
+            transform.forward = test;
+
+            Debug.Log(test);
+
             IEnumerator specialBehavior = GetSpecialBehavior();
 
             if(specialBehavior != null)
@@ -95,14 +100,14 @@ public class Enemy : MonoPoolable
             float time = enemyParams.StepTime;
 
             Quaternion desiredRotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
-            Quaternion fromRotation = bodyPivot.rotation;
+            Quaternion fromRotation = bodyPivot.localRotation;
 
             Vector3 pivotOffset = (body.position - bodyPivot.position) * 2.0f;
 
             while(elapsed < time)
             {
                 Quaternion rotation = Quaternion.Slerp(fromRotation, desiredRotation, elapsed / time);
-                bodyPivot.rotation = rotation;
+                bodyPivot.localRotation = rotation;
 
                 Vector3 newPosition = new Vector3(body.position.x, transform.position.y, body.position.z);
 
@@ -114,12 +119,12 @@ public class Enemy : MonoPoolable
                 elapsed += Time.deltaTime;
             }
 
-            bodyPivot.rotation = desiredRotation;
+            bodyPivot.localRotation = desiredRotation;
 
             Vector3 bodyPosition = body.position;
             Quaternion bodyRotation = body.rotation;
 
-            bodyPivot.rotation = Quaternion.identity;
+            bodyPivot.localRotation = Quaternion.identity;
             body.rotation = bodyRotation;
 
             bodyPivot.position -= new Vector3(pivotOffset.x, 0.0f, pivotOffset.z);
@@ -132,6 +137,12 @@ public class Enemy : MonoPoolable
     protected virtual IEnumerator GetSpecialBehavior()
     {
         yield break;
+    }
+
+    protected virtual Vector3 GetNextStepFacing()
+    {
+        Vector3 dir = (target.position - transform.position).normalized;
+        return new Vector3(dir.x, 0.0f, dir.z);
     }
 
     public void Hit(int damage, out bool dead)

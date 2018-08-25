@@ -8,9 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3436039b98227934491a6bfab85d1f5a, type: 3}
-  m_Name: JumpingEnemyShared
+  m_Script: {fileID: 11500000, guid: aff95bd0a08e9144c9493a738d82d05f, type: 3}
+  m_Name: ZigZagEnemySpecialParams
   m_EditorClassIdentifier: 
-  HP: 3
-  StepTime: 0.5
-  StepInterval: 0.1515
+  StepsPerDir: 3
+  DirectionQueue: 00000000010000000000000002000000
