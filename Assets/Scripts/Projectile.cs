@@ -7,7 +7,6 @@ public class Projectile : MonoPoolable
     private int hitMask;
 
     public float speed = 10.0f;
-    public float knockbackStrength = 0.15f;
 
     [Space]
 
@@ -48,7 +47,30 @@ public class Projectile : MonoPoolable
 
         if (hitCount > 0)
         {
-            Dispose(0.05f);
+            for(int i = 0; i < hitCount; i++)
+            {
+                Enemy enemy = hits[i].transform.GetComponent<Enemy>();
+
+                if(enemy != null)
+                {
+                    bool killingBlow;
+
+                    enemy.Hit(weaponParams.Damage, out killingBlow);
+
+                    if(killingBlow)
+                    {
+                        Dispose(0.05f);
+                    }
+                    else
+                    {
+                        Dispose(0.1f);
+                    }
+
+                    return;
+                }
+            }
+
+            Dispose(0.0f);
         }
         else
         {
