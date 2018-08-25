@@ -6,6 +6,7 @@ public class Enemy : MonoPoolable
 {
     private string colorPropertyName = "_Color";
     private int enemyMaskLayerMask;
+    private const float playerCollisionThreshold = 10.0f;
 
     private YieldInstruction collisionAvoidanceDelay = new WaitForSeconds(1.0f);
     private YieldInstruction stepInterval;
@@ -30,8 +31,6 @@ public class Enemy : MonoPoolable
 
     #endregion
 
-    private Transform target;
-
     private int baseHp;
     private int hp;
 
@@ -41,12 +40,17 @@ public class Enemy : MonoPoolable
 
     private Color color;
 
+    private Vector3 initialPivotPosition;
+    private Quaternion initialPivotRotation;
+
+    private Vector3 initialBodyPosition;
+    private Quaternion initialBodyRotation;
+
     void Awake()
     {
         enemyMaskLayerMask = LayerMask.GetMask("Enemy");
 
         collider = GetComponent<BoxCollider>();
-        target = FindObjectOfType<Player>().transform;
 
         renderer = GetComponentInChildren<Renderer>();
         baseMaterial = renderer.material;
@@ -56,6 +60,13 @@ public class Enemy : MonoPoolable
         hp = enemyParams.HP;
 
         stepInterval = new WaitForSeconds(enemyParams.StepInterval);
+
+        initialPivotPosition = bodyPivot.localPosition;
+        initialPivotRotation = bodyPivot.localRotation;
+
+        initialBodyPosition = body.localPosition;
+        initialBodyRotation = body.localRotation;
+
         OnAwake();
     }
 
@@ -67,6 +78,14 @@ public class Enemy : MonoPoolable
 
         collider.enabled = true;
         enabled = true;
+
+        bodyPivot.localPosition = initialPivotPosition;
+        bodyPivot.localRotation = initialPivotRotation;
+
+        body.localPosition = initialBodyPosition;
+        body.localRotation = initialBodyRotation;
+
+        renderer.material.SetColor(colorPropertyName, color);
     }
 
     void OnEnable()
@@ -87,14 +106,7 @@ public class Enemy : MonoPoolable
             Vector3 test = GetNextStepFacing();
             transform.forward = test;
 
-            Debug.Log(test);
-
-            IEnumerator specialBehavior = GetSpecialBehavior();
-
-            if(specialBehavior != null)
-            {
-                yield return specialBehavior;
-            }
+            yield return GetSpecialBehavior();
 
             float elapsed = 0.0f;
             float time = enemyParams.StepTime;
@@ -130,6 +142,8 @@ public class Enemy : MonoPoolable
             bodyPivot.position -= new Vector3(pivotOffset.x, 0.0f, pivotOffset.z);
             body.position = bodyPosition;
 
+            TryHitPlayer();
+
             yield return stepInterval;
         }
     }
@@ -141,8 +155,20 @@ public class Enemy : MonoPoolable
 
     protected virtual Vector3 GetNextStepFacing()
     {
-        Vector3 dir = (target.position - transform.position).normalized;
+        Vector3 dir = (Player.Instance.transform.position - transform.position).normalized;
         return new Vector3(dir.x, 0.0f, dir.z);
+    }
+
+    protected void TryHitPlayer()
+    {
+        float sqrMagToPlayer = (Player.Instance.transform.position - transform.position).sqrMagnitude;
+
+        if (sqrMagToPlayer <= playerCollisionThreshold)
+        {
+            StartCoroutine(FlashRoutine());
+            Player.Instance.Hit();
+            Dispose();
+        }
     }
 
     public void Hit(int damage, out bool dead)

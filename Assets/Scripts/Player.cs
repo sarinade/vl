@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     private float maxLookDistance = 25.0f;
     private float maxAimDistance = 100.0f;
@@ -100,5 +100,10 @@ public class Player : MonoBehaviour
 
         weapon.SetWeaponParams(newWeapon);
         HUD.Instance.SetWeaponNameLabel(newWeapon.Name);
+    }
+
+    public void Hit()
+    {
+
     }
 }
