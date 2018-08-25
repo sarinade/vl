@@ -180,7 +180,7 @@ public class Enemy : MonoPoolable
     {
         renderer.material = hitMaterial;
 
-        yield return new WaitForSeconds(0.066f);
+        yield return new WaitForSeconds(0.033f);
 
         renderer.material = baseMaterial;
 

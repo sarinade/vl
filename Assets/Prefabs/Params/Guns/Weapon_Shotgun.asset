@@ -14,7 +14,7 @@ MonoBehaviour:
   Name: Shotgun
   AllowContinuousFire: 0
   Damage: 2
-  projectileLifespan: 0.33
+  projectileLifespan: 0.5
   Interval: 0.33
   ProjectileCount: 12
   Spread: 0.15
