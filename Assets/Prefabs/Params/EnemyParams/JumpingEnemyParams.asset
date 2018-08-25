@@ -8,18 +8,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3436039b98227934491a6bfab85d1f5a, type: 3}
-  m_Name: EnemyParams
+  m_Script: {fileID: 11500000, guid: a34cb8523cc1ba5479eb06f8ea55ea9a, type: 3}
+  m_Name: JumpingEnemyParams
   m_EditorClassIdentifier: 
-  HP: 5
-  StepTime: 1
-  StepInterval: 0.33
-  JumpIntervalMin: 3
-  JumpIntervalMax: 5
-  JumpHeight: 12
+  JumpIntervalMin: 2
+  JumpIntervalMax: 3.5
+  JumpHeight: 10
   JumpDistance: 6
-  JumpTime: 1
-  JumpWindupTime: 0.15
+  JumpTime: 1.1515
+  JumpWindupTime: 0.1515
   JumpCurve:
     serializedVersion: 2
     m_Curve:

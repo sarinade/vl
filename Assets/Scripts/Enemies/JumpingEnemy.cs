@@ -9,10 +9,17 @@ public class JumpingEnemy : Enemy
     private float jumpTimestamp = 0.0f;
     private float nextJumpInteval;
 
+    #region Inspector
+
+    [SerializeField]
+    private JumpingEnemyParams specialParams = null;
+
+    #endregion
+
     protected override void OnAwake()
     {
-        nextJumpInteval = Random.Range(enemyParams.JumpIntervalMin, enemyParams.JumpIntervalMax);
-        windup = new WaitForSeconds(enemyParams.JumpWindupTime);
+        nextJumpInteval = Random.Range(specialParams.JumpIntervalMin, specialParams.JumpIntervalMax);
+        windup = new WaitForSeconds(specialParams.JumpWindupTime);
     }
 
     public override void Reinitialize()
@@ -20,7 +27,7 @@ public class JumpingEnemy : Enemy
         base.Reinitialize();
 
         jumpTimestamp = Time.time;
-        nextJumpInteval = Random.Range(enemyParams.JumpIntervalMin, enemyParams.JumpIntervalMax);
+        nextJumpInteval = Random.Range(specialParams.JumpIntervalMin, specialParams.JumpIntervalMax);
     }
 
     protected override IEnumerator GetSpecialBehavior()
@@ -29,18 +36,18 @@ public class JumpingEnemy : Enemy
             yield break;
 
         jumpTimestamp = Time.time;
-        nextJumpInteval = Random.Range(enemyParams.JumpIntervalMin, enemyParams.JumpIntervalMax);
+        nextJumpInteval = Random.Range(specialParams.JumpIntervalMin, specialParams.JumpIntervalMax);
 
         Vector3 from = transform.position;
-        Vector3 peak = transform.position + transform.forward * enemyParams.JumpDistance * 0.5f + Vector3.up * enemyParams.JumpHeight;
-        Vector3 destination = transform.position + transform.forward * enemyParams.JumpDistance;
+        Vector3 peak = transform.position + transform.forward * specialParams.JumpDistance * 0.5f + Vector3.up * specialParams.JumpHeight;
+        Vector3 destination = transform.position + transform.forward * specialParams.JumpDistance;
 
         float elapsed = 0.0f;
 
-        while(elapsed < enemyParams.JumpTime)
+        while(elapsed < specialParams.JumpTime)
         {
-            float normalizedTime = elapsed / enemyParams.JumpTime;
-            transform.position = GetQuadraticBezierPoint(from, peak, destination, enemyParams.JumpCurve.Evaluate(normalizedTime));
+            float normalizedTime = elapsed / specialParams.JumpTime;
+            transform.position = GetQuadraticBezierPoint(from, peak, destination, specialParams.JumpCurve.Evaluate(normalizedTime));
 
             yield return null;
             elapsed += Time.deltaTime;

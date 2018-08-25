@@ -13,7 +13,7 @@ public class Enemy : MonoPoolable
     #region Inspector
 
     [SerializeField]
-    protected EnemyParams enemyParams = null;
+    protected SharedEnemyParams enemyParams = null;
 
     [Space]
 

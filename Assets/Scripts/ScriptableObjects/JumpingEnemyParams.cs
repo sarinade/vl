@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyParams", menuName = "VL/Gameplay/EnemyParams", order = 1)]
-public class EnemyParams : ScriptableObject
+[CreateAssetMenu(fileName = "JumpingEnemyParams", menuName = "VL/Gameplay/Enemies/JumpingEnemyParams", order = 1)]
+public class JumpingEnemyParams : ScriptableObject
 {
-    [Header("Shared")]
-
-    public int HP = 5;
-    public float StepTime = 1.0f;
-    public float StepInterval = 0.33f;
-
     [Header("Jumping Enemy")]
 
     public float JumpIntervalMin = 3.0f;

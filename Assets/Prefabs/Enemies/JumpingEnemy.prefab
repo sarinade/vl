@@ -68,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 1790285120404750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -46.25}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4472718558691780}
   m_Father: {fileID: 0}
@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254ca4c918389a04a8b6723adba007c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyParams: {fileID: 11400000, guid: f056058b14e4bf6459230f6ebe844872, type: 2}
+  enemyParams: {fileID: 11400000, guid: 6ef7540d9d568824aa3fc5fb5d07f174, type: 2}
   bodyPivot: {fileID: 4472718558691780}
   body: {fileID: 4632116465728174}
   hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
+  specialParams: {fileID: 11400000, guid: 99c9259626262064fb5ad9d615140aef, type: 2}
