@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e07fcbfe2d79584ea251cc65d5a4dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 50
   knockbackStrength: 0.15
-  lifespan: 2
   radius: 0.33

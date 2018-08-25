@@ -5,6 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Weapon01", menuName = "VL/Gameplay/New Weapon", order = 1)]
 public class WeaponParams : ScriptableObject
 {
+    public string Name = "Gun";
+
+    [Space]
+
     public bool AllowContinuousFire = false;
 
     [Space]

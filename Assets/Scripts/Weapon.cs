@@ -9,6 +9,11 @@ public class Weapon : MonoBehaviour
 
     private float lastFireTimestamp = Mathf.NegativeInfinity;
 
+    public void SetWeaponParams(WeaponParams parameters)
+    {
+        weaponParams = parameters;
+    }
+
     public void Fire(Vector3 point, Vector3 direction, bool buttonDown)
     {
         if(!buttonDown)

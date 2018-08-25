@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923ae6ae28d999e41962d9abed1f2d96, type: 3}
   m_Name: Weapon_Shotgun
   m_EditorClassIdentifier: 
+  Name: Shotgun
   AllowContinuousFire: 0
   Damage: 2
   projectileLifespan: 0.33

@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea509ff30ab3bf49be800cca372c139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114482721019163496, guid: f93fbe0f930db8445a02eab247e679f6, type: 2}
+  weaponParams: {fileID: 11400000, guid: 3912bd1c100fd7847ad2d2615f1f69dc, type: 2}
 --- !u!114 &114393852556209254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,4 +236,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13347f4b01382e47a602440a8681015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadout: {fileID: 11400000, guid: 74bdf288f09f94f488db6d558ca73d31, type: 2}
   inputParams: {fileID: 11400000, guid: 42d785621f0875e4e961230be45e40b3, type: 2}

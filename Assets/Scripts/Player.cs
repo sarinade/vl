@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float maxLookDistance = 45.0f;
+    private float maxLookDistance = 25.0f;
     private float maxAimDistance = 100.0f;
 
     private int aimMask;
@@ -12,16 +12,24 @@ public class Player : MonoBehaviour
     #region Inspector
 
     [SerializeField]
+    private LoadoutParams loadout = null;
+
+    [Space]
+
+    [SerializeField]
     private InputParams inputParams = null;
 
     #endregion
 
     private Weapon weapon = null;
+    private int weaponIndex = 0;
 
     void Start()
     {
         aimMask = LayerMask.GetMask("Enemy");
+
         weapon = GetComponent<Weapon>();
+        SetWeapon(loadout.StartingWeaponIndex);
 
         GameCamera.Instance.Target = transform;
     }
@@ -62,5 +70,35 @@ public class Player : MonoBehaviour
             bool buttonDown = Input.GetButtonDown(inputParams.FireButton);
             weapon.Fire(projectileSpawnPoint, projectileFacing, buttonDown);
         }
+
+        for(int i = (int) KeyCode.Alpha1; i < (int) KeyCode.Alpha9; i++)
+        {
+            if(Input.GetKeyDown((KeyCode) i))
+            {
+                SetWeapon(i - (int) KeyCode.Alpha1);
+            }
+        }
+
+        if(Input.mouseScrollDelta.y != 0.0f)
+        {
+            int weaponCount = loadout.GetWeaponCount();
+            weaponIndex = (weaponIndex - (int) Mathf.Sign(Input.mouseScrollDelta.y)) % weaponCount;
+
+            if(weaponIndex < 0)
+            {
+                weaponIndex = weaponCount - 1;
+            }
+
+            SetWeapon(weaponIndex);
+        }
+    }
+
+    private void SetWeapon(int index)
+    {
+        weaponIndex = index;
+        WeaponParams newWeapon = loadout.GetWeapon(weaponIndex);
+
+        weapon.SetWeaponParams(newWeapon);
+        HUD.Instance.SetWeaponNameLabel(newWeapon.Name);
     }
 }
