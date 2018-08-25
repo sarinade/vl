@@ -95,7 +95,7 @@ Transform:
   m_GameObject: {fileID: 1743604090246774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -50}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4344809808603452}
   m_Father: {fileID: 0}
@@ -169,4 +169,4 @@ MonoBehaviour:
   enemyParams: {fileID: 11400000, guid: 894e1e96b480d5b42920af1065b8b24a, type: 2}
   bodyPivot: {fileID: 4344809808603452}
   body: {fileID: 4229375395630920}
-  hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
+  hitMaterial: {fileID: 2100000, guid: 2b8f3b4508f4bdb469d28e3714fdee97, type: 2}

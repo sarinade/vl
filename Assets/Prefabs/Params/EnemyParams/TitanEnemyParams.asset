@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3436039b98227934491a6bfab85d1f5a, type: 3}
   m_Name: TitanEnemyParams
   m_EditorClassIdentifier: 
-  HP: 50
+  HP: 100
+  Damage: 10
   StepTime: 2.5
   StepInterval: 0.66
