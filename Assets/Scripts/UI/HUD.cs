@@ -11,12 +11,21 @@ public class HUD : Singleton<HUD>
     private Text weaponNameText = null;
 
     [SerializeField]
+    private Image hpProgressBar = null;
+
+    [SerializeField]
     private GameEndPanel gameEndPanel = null;
 
     [SerializeField]
     private PausePanel pausePanel = null;
 
     #endregion
+
+    public void SetHPProgress(float progress)
+    {
+        progress = Mathf.Clamp01(progress);
+        hpProgressBar.fillAmount = progress;
+    }
 
     public void SetWeaponNameLabel(string name)
     {

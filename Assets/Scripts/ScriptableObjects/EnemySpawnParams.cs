@@ -14,6 +14,10 @@ public class EnemySpawnParams : ScriptableObject
 {
     public float SpawnInterval = 3.0f;
     public float SpawnRadius = 25.0f;
+
+    [Space]
+
+    public int SpawnCap = 3;
     public int KillsToSpawnTitan = 25;
 
     [Space]

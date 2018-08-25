@@ -187,6 +187,8 @@ public class Enemy : MonoPoolable
         {
             Dispose();
             dead = true;
+
+            OnKill();
         }
         else
         {
@@ -194,8 +196,12 @@ public class Enemy : MonoPoolable
         }
     }
 
+    protected virtual void OnKill() { }
+
     public void Dispose()
     {
+        GameLoop.Instance.OnEnemyKilled();
+
         collider.enabled = false;
         enabled = false;
 
@@ -218,7 +224,7 @@ public class Enemy : MonoPoolable
         renderer.material = baseMaterial;
 
         float colorFadeRate = 1.0f - Mathf.Clamp01((float) hp / (float) baseHp);
-        Color newColor = Color.Lerp(color, Color.white, colorFadeRate);
+        Color newColor = Color.Lerp(color, Color.gray, colorFadeRate);
         renderer.material.SetColor(colorPropertyName, newColor);
     }
 }

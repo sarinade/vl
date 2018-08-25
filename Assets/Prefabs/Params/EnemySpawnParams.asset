@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnInterval: 1.5
   SpawnRadius: 70
+  SpawnCap: 10
   KillsToSpawnTitan: 25
   TitanPrefab: {fileID: 114441537486868640, guid: 294820442e9d06a4785a8462f33ef368,
     type: 2}

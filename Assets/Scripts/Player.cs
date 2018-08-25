@@ -129,6 +129,7 @@ public class Player : Singleton<Player>
     public void Hit(int damage)
     {
         hp -= damage;
+        HUD.Instance.SetHPProgress((float) hp / playerParams.HP);
 
         if(hp <= 0)
         {

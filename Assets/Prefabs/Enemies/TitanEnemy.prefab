@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4784100096791454}
-  - component: {fileID: 114441537486868640}
+  - component: {fileID: 114038525818854674}
   - component: {fileID: 65144976110911174}
   m_Layer: 10
   m_Name: TitanEnemy
@@ -155,7 +155,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &114441537486868640
+--- !u!114 &114038525818854674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +163,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1743604090246774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0874ac33ee6b3499517baea7a0b585, type: 3}
+  m_Script: {fileID: 11500000, guid: 55123b3227f8b704f9f279f0a9ea76b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyParams: {fileID: 11400000, guid: 894e1e96b480d5b42920af1065b8b24a, type: 2}
   bodyPivot: {fileID: 4344809808603452}
   body: {fileID: 4229375395630920}
-  hitMaterial: {fileID: 2100000, guid: 2b8f3b4508f4bdb469d28e3714fdee97, type: 2}
+  hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
