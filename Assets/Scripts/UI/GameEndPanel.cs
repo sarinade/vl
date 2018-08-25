@@ -23,6 +23,8 @@ public class GameEndPanel : MonoBehaviour
     public void Show(bool victory)
     {
         Time.timeScale = 0.0f;
+        Player.Instance.FreezeInput = true;
+
         header.text = victory ? victoryHeader : gameOverHeader;
 
         gameObject.SetActive(true);

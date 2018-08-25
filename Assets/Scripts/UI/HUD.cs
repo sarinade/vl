@@ -13,6 +13,9 @@ public class HUD : Singleton<HUD>
     [SerializeField]
     private GameEndPanel gameEndPanel = null;
 
+    [SerializeField]
+    private PausePanel pausePanel = null;
+
     #endregion
 
     public void SetWeaponNameLabel(string name)
@@ -23,5 +26,13 @@ public class HUD : Singleton<HUD>
     public void ShowGameEndPanel(bool victory)
     {
         gameEndPanel.Show(victory);
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePanel.TogglePausePanel();
+        }
     }
 }

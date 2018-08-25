@@ -22,6 +22,20 @@ public class Player : Singleton<Player>
 
     #endregion
 
+    private bool freezeInput = false;
+
+    public bool FreezeInput
+    {
+        get
+        {
+            return freezeInput;
+        }
+        set
+        {
+            freezeInput = value;
+        }
+    }
+
     private Weapon weapon = null;
     private int weaponIndex = 0;
 
@@ -40,6 +54,9 @@ public class Player : Singleton<Player>
 
     void Update()
     {
+        if (freezeInput)
+            return;
+
         Ray lookRay = GameCamera.Instance.GameCam.ScreenPointToRay(Input.mousePosition);
         Vector3 lookDirection;
 
