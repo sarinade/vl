@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: JumpingEnemyParams
   m_EditorClassIdentifier: 
   HP: 3
-  StepTime: 0.5
-  StepInterval: 0.1515
+  Damage: 1
+  StepTime: 0.33
+  StepInterval: 0

@@ -31,9 +31,11 @@ public class Weapon : MonoBehaviour
         {
             float xSpread = Random.Range(-weaponParams.Spread, weaponParams.Spread);
             float ySpread = Random.Range(-weaponParams.Spread, weaponParams.Spread);
-            Quaternion facing = Quaternion.LookRotation(direction + new Vector3(xSpread, ySpread, 0.0f));
+            float zSpread = Random.Range(-weaponParams.Spread, weaponParams.Spread);
 
-            Projectile instance = PoolService.Instance.Spawn(weaponParams.ProjectilePrefab, point, facing);
+            Vector3 inaccurateDirection = Quaternion.Euler(xSpread, ySpread, zSpread) * direction;
+
+            Projectile instance = PoolService.Instance.Spawn(weaponParams.ProjectilePrefab, point, Quaternion.LookRotation(inaccurateDirection));
             instance.SetWeaponParams(weaponParams);
         }
     }

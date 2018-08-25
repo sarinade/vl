@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: ZigZagEnemyParams
   m_EditorClassIdentifier: 
   HP: 5
+  Damage: 2
   StepTime: 1
   StepInterval: 0.33

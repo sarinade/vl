@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63b9480463b9c34090fccea92375ba3, type: 3}
   m_Name: EnemySpawnParams
   m_EditorClassIdentifier: 
-  SpawnInterval: 1.5
+  SpawnInterval: Infinity
   SpawnRadius: 70
   SpawnCap: 10
   KillsToSpawnTitan: 25

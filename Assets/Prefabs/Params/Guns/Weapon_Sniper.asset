@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sniper Rifle
   AllowContinuousFire: 0
-  Damage: 6
+  Damage: 5
   projectileLifespan: 2
   Interval: 0.5
   ProjectileCount: 1

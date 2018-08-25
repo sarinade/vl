@@ -49,16 +49,17 @@ public class JumpingEnemy : Enemy
             float normalizedTime = elapsed / specialParams.JumpTime;
             transform.position = GetQuadraticBezierPoint(from, peak, destination, specialParams.JumpCurve.Evaluate(normalizedTime));
 
-            if(TryHitPlayer())
-            {
-                yield break;
-            }
-
             yield return null;
             elapsed += Time.deltaTime;
         }
 
         transform.position = destination;
+
+        if (TryHitPlayer())
+        {
+            yield break;
+        }
+
         yield return windup;
     }
 

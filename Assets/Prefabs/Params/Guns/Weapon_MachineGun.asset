@@ -17,6 +17,7 @@ MonoBehaviour:
   projectileLifespan: 2
   Interval: 0.1
   ProjectileCount: 1
-  Spread: 0.03
+  Spread: 1
+  MinimumSpread: 0
   ProjectilePrefab: {fileID: 114482721019163496, guid: f93fbe0f930db8445a02eab247e679f6,
     type: 2}

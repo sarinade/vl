@@ -16,7 +16,8 @@ MonoBehaviour:
   Damage: 2
   projectileLifespan: 0.5
   Interval: 0.33
-  ProjectileCount: 12
-  Spread: 0.15
+  ProjectileCount: 8
+  Spread: 10
+  MinimumSpread: 0.075
   ProjectilePrefab: {fileID: 114482721019163496, guid: e80a53ceb2c660540b1e6aa1b0af1333,
     type: 2}
