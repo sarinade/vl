@@ -98,6 +98,8 @@ public class Enemy : MonoPoolable
 
             if(MathHelpers.CustomBoxCheck(transform.position, transform.forward, sweepTestOffset, transform.rotation, transform.localScale * 0.5f))
             {
+                OnPathBlocked();
+
                 yield return collisionAvoidanceDelay;
                 continue;
             }
@@ -155,6 +157,8 @@ public class Enemy : MonoPoolable
         Vector3 dir = (Player.Instance.transform.position - transform.position).normalized;
         return new Vector3(dir.x, 0.0f, dir.z);
     }
+
+    protected virtual void OnPathBlocked() { }
 
     protected bool TryHitPlayer()
     {

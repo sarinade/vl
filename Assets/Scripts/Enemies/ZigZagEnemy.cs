@@ -11,6 +11,9 @@ public enum EZigZagEnemyDir
 
 public class ZigZagEnemy : Enemy
 {
+    private const int resetQueueAttemptThreshold = 3;
+    int movementAttempts = 0;
+
     private int directionIndex = 0;
     private int steps = 0;
 
@@ -47,6 +50,19 @@ public class ZigZagEnemy : Enemy
     {
         EZigZagEnemyDir direction = specialParams.DirectionQueue[directionIndex];
         return EnumToFacing(direction);
+    }
+
+    protected override void OnPathBlocked()
+    {
+        if(movementAttempts >= resetQueueAttemptThreshold)
+        {
+            movementAttempts = 0;
+            directionIndex = 0;
+        }
+        else
+        {
+            movementAttempts++;
+        }
     }
 
     private Vector3 EnumToFacing(EZigZagEnemyDir dir)
