@@ -9,6 +9,8 @@ public class Player : Singleton<Player>
 
     private int aimMask;
 
+    private FlashEffect flashEffect = null;
+
     #region Inspector
 
     [SerializeField]
@@ -39,12 +41,13 @@ public class Player : Singleton<Player>
     private Weapon weapon = null;
     private int weaponIndex = 0;
 
-    int hp;
+    private int hp;
 
     void Start()
     {
         aimMask = LayerMask.GetMask("Enemy");
 
+        flashEffect = GetComponent<FlashEffect>();
         weapon = GetComponent<Weapon>();
         SetWeapon(loadout.StartingWeaponIndex);
 
@@ -131,7 +134,9 @@ public class Player : Singleton<Player>
         hp -= damage;
         HUD.Instance.SetHPProgress((float) hp / playerParams.HP);
 
-        if(hp <= 0)
+        flashEffect.Flash();
+
+        if (hp <= 0)
         {
             HUD.Instance.ShowGameEndPanel(false);
         }

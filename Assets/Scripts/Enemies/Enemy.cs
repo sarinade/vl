@@ -24,18 +24,13 @@ public class Enemy : MonoPoolable
     [SerializeField]
     private Transform body = null;
 
-    [Space]
-
-    [SerializeField]
-    private Material hitMaterial = null;
-
     #endregion
 
-    private int baseHp;
     private int hp;
 
     private new BoxCollider collider = null;
     private new Renderer renderer = null;
+    private FlashEffect flashEffect = null;
     private Material baseMaterial = null;
 
     private Color color;
@@ -49,12 +44,12 @@ public class Enemy : MonoPoolable
     void Awake()
     {
         collider = GetComponent<BoxCollider>();
+        flashEffect = GetComponent<FlashEffect>();
 
         renderer = GetComponentInChildren<Renderer>();
         baseMaterial = renderer.material;
 
         color = baseMaterial.GetColor(colorPropertyName);
-        baseHp = enemyParams.HP;
         hp = enemyParams.HP;
 
         stepInterval = new WaitForSeconds(enemyParams.StepInterval);
@@ -72,7 +67,7 @@ public class Enemy : MonoPoolable
 
     public override void Reinitialize()
     {
-        hp = baseHp;
+        hp = enemyParams.HP;
 
         collider.enabled = true;
         enabled = true;
@@ -167,7 +162,9 @@ public class Enemy : MonoPoolable
 
         if (sqrMagToPlayer <= playerCollisionThreshold)
         {
-            StartCoroutine(FlashRoutine());
+            float normalizedHP = Mathf.Clamp01((float) hp / (float) enemyParams.HP);
+            flashEffect.Flash(normalizedHP);
+
             Player.Instance.Hit(enemyParams.Damage);
             Dispose();
 
@@ -180,7 +177,9 @@ public class Enemy : MonoPoolable
     public void Hit(int damage, out bool dead)
     {
         hp -= damage;
-        StartCoroutine(FlashRoutine());
+
+        float normalizedHP = Mathf.Clamp01((float)hp / (float) enemyParams.HP);
+        flashEffect.Flash(normalizedHP);
 
         if (hp <= 0)
         {
@@ -212,18 +211,5 @@ public class Enemy : MonoPoolable
         yield return new WaitForSeconds(0.075f);
 
         Despawn(0.0f);
-    }
-
-    private IEnumerator FlashRoutine()
-    {
-        renderer.material = hitMaterial;
-
-        yield return new WaitForSeconds(0.066f);
-
-        renderer.material = baseMaterial;
-
-        float colorFadeRate = 1.0f - Mathf.Clamp01((float) hp / (float) baseHp);
-        Color newColor = Color.Lerp(color, Color.gray, colorFadeRate);
-        renderer.material.SetColor(colorPropertyName, newColor);
     }
 }

@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4089124753736472}
   - component: {fileID: 114450431876905150}
   - component: {fileID: 65246756288063176}
+  - component: {fileID: 114383384531785442}
   m_Layer: 10
   m_Name: JumpingEnemy
   m_TagString: Untagged
@@ -155,6 +156,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &114383384531785442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1790285120404750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf0365c5b700774782c4ba451e55bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
 --- !u!114 &114450431876905150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,5 +182,4 @@ MonoBehaviour:
   enemyParams: {fileID: 11400000, guid: 6ef7540d9d568824aa3fc5fb5d07f174, type: 2}
   bodyPivot: {fileID: 4472718558691780}
   body: {fileID: 4632116465728174}
-  hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
   specialParams: {fileID: 11400000, guid: 99c9259626262064fb5ad9d615140aef, type: 2}

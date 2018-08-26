@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4176217394918594}
   - component: {fileID: 114540717686519352}
   - component: {fileID: 65794247353372452}
+  - component: {fileID: 114562059784626580}
   m_Layer: 10
   m_Name: SimpleEnemy
   m_TagString: Untagged
@@ -169,4 +170,15 @@ MonoBehaviour:
   enemyParams: {fileID: 11400000, guid: f056058b14e4bf6459230f6ebe844872, type: 2}
   bodyPivot: {fileID: 4899603014736866}
   body: {fileID: 4267103585351776}
+--- !u!114 &114562059784626580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021003457847078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf0365c5b700774782c4ba451e55bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}

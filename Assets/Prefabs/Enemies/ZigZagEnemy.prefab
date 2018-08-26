@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4372634527532078}
   - component: {fileID: 114139254423682442}
   - component: {fileID: 65744560377729404}
+  - component: {fileID: 114799815932498302}
   m_Layer: 10
   m_Name: ZigZagEnemy
   m_TagString: Untagged
@@ -169,5 +170,16 @@ MonoBehaviour:
   enemyParams: {fileID: 11400000, guid: d3fee7ff82cbd1c41850b76bee52251c, type: 2}
   bodyPivot: {fileID: 4981031626754280}
   body: {fileID: 4904556044237906}
-  hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
   specialParams: {fileID: 11400000, guid: 9c9137653ea3e614d9fdad206f77373b, type: 2}
+--- !u!114 &114799815932498302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1003272042767160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf0365c5b700774782c4ba451e55bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMaterial: {fileID: 2100000, guid: f7206a953411b1b47a2a7452cac5d919, type: 2}
