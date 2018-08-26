@@ -75,7 +75,9 @@ public class GameLoop : Singleton<GameLoop>
                 PoolService.Instance.Spawn(enemy, nextPosition, Quaternion.identity);
 
                 if (spawnTitan)
-                    yield break;
+                {
+                    kills = 0;
+                }
             }
 
             yield return null;
