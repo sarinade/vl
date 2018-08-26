@@ -6,6 +6,6 @@ public class TitanEnemy : Enemy
 {
     protected override void OnKill()
     {
-        HUD.Instance.ShowGameEndPanel(true);
+        GameLoop.Instance.EndGame(1.0f, true);
     }
 }

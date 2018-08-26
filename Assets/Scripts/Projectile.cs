@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Projectile : MonoPoolable
 {
-    private int hitMask;
+    #region Inspector
 
-    public float speed = 10.0f;
+    [SerializeField]
+    private float speed = 10.0f;
 
-    [Space]
+    [SerializeField]
+    private float radius = 0.33f;
 
-    public float radius = 0.33f;
+    #endregion
 
     private float spawnTimestamp = 0.0f;
+
     private RaycastHit[] hits = new RaycastHit[10];
+    private int hitMask;
 
     private WeaponParams weaponParams = null;
 

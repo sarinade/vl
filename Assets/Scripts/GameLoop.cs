@@ -107,4 +107,15 @@ public class GameLoop : Singleton<GameLoop>
     {
         SceneManager.LoadScene(sceneParams.GameSceneIndex);
     }
+
+    public void EndGame(float delay, bool victory)
+    {
+        StartCoroutine(ShowGameEndDelayed(delay, victory));
+    }
+
+    private IEnumerator ShowGameEndDelayed(float delay, bool victory)
+    {
+        yield return new WaitForSeconds(delay);
+        HUD.Instance.ShowGameEndPanel(victory);
+    }
 }

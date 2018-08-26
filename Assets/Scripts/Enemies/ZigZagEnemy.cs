@@ -12,10 +12,6 @@ public enum EZigZagEnemyDir
 public class ZigZagEnemy : Enemy
 {
     private const int resetQueueAttemptThreshold = 3;
-    int movementAttempts = 0;
-
-    private int directionIndex = 0;
-    private int steps = 0;
 
     #region Inspector
 
@@ -23,6 +19,11 @@ public class ZigZagEnemy : Enemy
     private ZigZagEnemyParams specialParams = null;
 
     #endregion
+
+    private int failedMovementAttempts = 0;
+
+    private int directionIndex = 0;
+    private int steps = 0;
 
     public override void Reinitialize()
     {
@@ -54,14 +55,14 @@ public class ZigZagEnemy : Enemy
 
     protected override void OnPathBlocked()
     {
-        if(movementAttempts >= resetQueueAttemptThreshold)
+        if(failedMovementAttempts >= resetQueueAttemptThreshold)
         {
-            movementAttempts = 0;
+            failedMovementAttempts = 0;
             directionIndex = 0;
         }
         else
         {
-            movementAttempts++;
+            failedMovementAttempts++;
         }
     }
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class FlashEffect : MonoBehaviour
 {
     private const string colorPropertyName = "_Color";
-
     private YieldInstruction flashDuration = new WaitForSeconds(0.066f);
     private new Renderer renderer;
     private Material baseMaterial;

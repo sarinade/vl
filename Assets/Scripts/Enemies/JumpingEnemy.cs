@@ -6,15 +6,15 @@ public class JumpingEnemy : Enemy
 {
     private YieldInstruction windup;
 
-    private float jumpTimestamp = 0.0f;
-    private float nextJumpInteval;
-
     #region Inspector
 
     [SerializeField]
     private JumpingEnemyParams specialParams = null;
 
     #endregion
+
+    private float jumpTimestamp = 0.0f;
+    private float nextJumpInteval;
 
     protected override void OnAwake()
     {
@@ -47,7 +47,7 @@ public class JumpingEnemy : Enemy
         while(elapsed < specialParams.JumpTime)
         {
             float normalizedTime = elapsed / specialParams.JumpTime;
-            transform.position = GetQuadraticBezierPoint(from, peak, destination, specialParams.JumpCurve.Evaluate(normalizedTime));
+            transform.position = MathHelpers.GetQuadraticBezierPoint(from, peak, destination, specialParams.JumpCurve.Evaluate(normalizedTime));
 
             yield return null;
             elapsed += Time.deltaTime;
@@ -61,13 +61,5 @@ public class JumpingEnemy : Enemy
         }
 
         yield return windup;
-    }
-
-    //https://catlikecoding.com/unity/tutorials/curves-and-splines/
-    public static Vector3 GetQuadraticBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
-    {
-        t = Mathf.Clamp01(t);
-        float oneMinusT = 1f - t;
-        return oneMinusT * oneMinusT * p0 + 2f * oneMinusT * t * p1 + t * t * p2;
     }
 }

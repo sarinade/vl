@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Player : Singleton<Player>
 {
-    private float maxLookDistance = 25.0f;
-    private float maxAimDistance = 100.0f;
-
-    private int aimMask;
-
-    private FlashEffect flashEffect = null;
+    private const float maxLookDistance = 25.0f;
+    private const float maxAimDistance = 100.0f;
 
     #region Inspector
 
@@ -42,12 +38,15 @@ public class Player : Singleton<Player>
     private int weaponIndex = 0;
 
     private int hp;
+    private int aimMask;
+
+    private FlashEffect flashEffect = null;
 
     void Start()
     {
         aimMask = LayerMask.GetMask("Enemy");
-
         flashEffect = GetComponent<FlashEffect>();
+
         weapon = GetComponent<Weapon>();
         SetWeapon(loadout.StartingWeaponIndex);
 
@@ -138,7 +137,7 @@ public class Player : Singleton<Player>
 
         if (hp <= 0)
         {
-            HUD.Instance.ShowGameEndPanel(false);
+            GameLoop.Instance.EndGame(0.1f, false);
         }
     }
 }
