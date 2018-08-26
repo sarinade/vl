@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9a4f44b93e7e5409d2188eb20a992a, type: 3}
   m_Name: CameraParams
   m_EditorClassIdentifier: 
-  Height: 2
+  Height: 3
   Radius: 10
   RotationSpeed: 5
